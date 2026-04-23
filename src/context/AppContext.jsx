@@ -16,10 +16,11 @@ export const AppProvider = ({ children }) => {
     }
   }, []);
 
-  const addPost = (text) => {
+  const addPost = (text, authorId) => {
     const newPost = {
       id: Date.now().toString(),
       text,
+      authorId,
       createdAt: new Date().toISOString()
     };
     

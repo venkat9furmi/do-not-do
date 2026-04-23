@@ -22,7 +22,7 @@ export const Dashboard = () => {
     e.preventDefault();
     if (!text.trim()) return;
     
-    addPost(text);
+    addPost(text, currentUser.id);
     setText('');
     setSuccessMsg('Successfully posted to the Global Feed anonymously!');
     

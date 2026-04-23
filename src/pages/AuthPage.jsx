@@ -48,14 +48,11 @@ export const AuthPage = () => {
         width: '100%',
         maxWidth: '400px',
         padding: '40px',
-        textAlign: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
+        textAlign: 'center'
       }}>
-        <div className="mz-logo" style={{ width: '64px', height: '64px', fontSize: '32px', marginBottom: '16px' }}>
-          MZ
-        </div>
+        <h1 className="gradient-text" style={{ fontSize: '36px', marginBottom: '8px' }}>
+          Do Not Do
+        </h1>
         <p style={{ color: 'var(--text-secondary)', marginBottom: '32px' }}>
           Share what you'd rather skip today.
         </p>
