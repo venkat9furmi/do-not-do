@@ -4,10 +4,22 @@ import { useAuth } from '../context/AuthContext';
 import { useAppContext } from '../context/AppContext';
 import { Navbar } from '../components/Navbar';
 import { PostCard } from '../components/PostCard';
-import { Globe } from 'lucide-react';
+import { UserCircle } from 'lucide-react';
 
-export const GlobalFeed = () => {
+export const MyFeed = () => {
+  const { currentUser } = useAuth();
   const { posts } = useAppContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!currentUser) {
+      navigate('/auth');
+    }
+  }, [currentUser, navigate]);
+
+  if (!currentUser) return null;
+
+  const myPosts = posts.filter(post => post.authorId === currentUser.id);
 
   return (
     <div style={{ minHeight: '100vh', padding: '0 20px 40px' }}>
@@ -24,23 +36,23 @@ export const GlobalFeed = () => {
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-            <Globe size={24} color="white" />
+            <UserCircle size={24} color="white" />
           </div>
           <div>
-            <h1 style={{ fontSize: '32px', margin: 0 }}>Global Feed</h1>
+            <h1 style={{ fontSize: '32px', margin: 0 }}>My Feed</h1>
             <p style={{ color: 'var(--text-secondary)', margin: 0 }}>
-              Anonymous confessions from around the world.
+              Your personal "Do Not Do" list.
             </p>
           </div>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {posts.length === 0 ? (
+          {myPosts.length === 0 ? (
             <div className="glass-panel" style={{ padding: '40px', textAlign: 'center', color: 'var(--text-muted)' }}>
-              No one has posted anything yet. Be the first!
+              You haven't posted anything yet! Click the + button above to start.
             </div>
           ) : (
-            posts.map(post => (
+            myPosts.map(post => (
               <PostCard key={post.id} text={post.text} createdAt={post.createdAt} />
             ))
           )}
